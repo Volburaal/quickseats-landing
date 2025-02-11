@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickSeats</title>
+    <link rel="icon" href="icon.png" >
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,8 +13,8 @@
         <div class="container header-content">
             <div class="logo">QuickSeats</div>
             <nav>
-                <a href="#">Services</a>
-                <a href="#about">About</a>
+                <a onclick="scrollToSection('about')">About</a>
+                <a onclick="scrollToSection('features')">Features</a>
             </nav>
         </div>
     </header>
@@ -26,25 +27,6 @@
                 <lottie-player src="https://cdn.lottielab.com/l/FJz4FZFuR1dfJJ.json" id="main-anim" loop autoplay></lottie-player>
             </div>
             <p></p>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Availability Status</h3>
-                    <p>Get and post updates and details about available vehicles heading to any destination.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Time Estimation</h3>
-                    <p>See time estimations, know when to expect transport at our campus</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Driver Contact</h3>
-                    <p>Direct contact with vehicle drivers and managers for questions and requests.</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -64,6 +46,65 @@
         </div>
     </section>
 
+    <section id="features" class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card" onclick="scrollToSection('Fon')">
+                    <h3>Availability Status</h3>
+                    <p>Get and post updates and details about available vehicles heading to any destination.</p>
+                </div>
+                <div class="feature-card" onclick="scrollToSection('C>F')">
+                    <h3>Time Estimation</h3>
+                    <p>See time estimations, know when to expect transport at our campus</p>
+                </div>
+                <div class="feature-card" onclick="scrollToSection('Fon')">
+                    <h3>Communication Options</h3>
+                    <p>Direct contact with vehicle drivers and managers for questions and requests.</p>
+                </div>
+                <div class="feature-card" onclick="scrollToSection('tracking')">
+                    <h3>Shuttle Tracking</h3>
+                    <p>Track the pick and drop shuttle service on weekends and never miss a seat.</p>
+                </div>
+        </div>
+    </section>
+
+    <section id="C>F" class="partners">
+        <div class="container">
+            <h2>Chiniot To Faislabad Transport</h2>
+            <div class="gt-logo-container">
+                <div class="gts-logo">
+                    <script src="https://cdn.lottielab.com/s/lottie-player@1.x/player-web.min.js"></script>
+                    <lottie-player src="https://cdn.lottielab.com/l/6q1ZZVLWv96ohz.json" loop autoplay speed="0.5" class="menu-anim"></lottie-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Fon" class="partners">
+        <div class="container">
+            <h2>Available Rides in Faislabad</h2>
+            <div class="gt-logo-container">
+                <div class="gts-logo">
+                    <script src="https://cdn.lottielab.com/s/lottie-player@1.x/player-web.min.js"></script>
+                    <lottie-player src="https://cdn.lottielab.com/l/7sAWPcb2FMRHHJ.json" loop autoplay speed="0.5" class="menu-anim"></lottie-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="tracking" class="partners">
+        <div class="container">
+            <h2>Shuttle Tracking</h2>
+            <div class="gt-logo-container">
+                <div class="gts-logo">
+                    <script src="https://cdn.lottielab.com/s/lottie-player@1.x/player-web.min.js"></script>
+                    <lottie-player src="https://cdn.lottielab.com/l/46X4hLgPHtTv4P.json" loop autoplay speed="0.5" class="menu-anim"></lottie-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="partners">
         <div class="container">
             <h2>(Plans to be) Partnered with GTS Station</h2>
@@ -75,6 +116,7 @@
             </div>
         </div>
     </section>
+
     <img src="footer-top.svg" class="footer-top">
     <footer style="margin: 0;">
     <div class="container">
@@ -96,6 +138,13 @@
         </div>
     </footer>
     <script>
+        function scrollToSection(id) {
+        const section = document.getElementById(id);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, '', window.location.pathname);
+        }
+      }
         function switchAnim() {
         var mainAnimation = document.getElementById('main-anim'); 
             if (window.innerWidth <= 768) {
