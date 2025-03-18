@@ -1,0 +1,4 @@
+ok i need you to do the following to the page
+
+add and account button that should open a dropdown with the options being login and signup buttons
+make the navbar responsive, as of now only the about and features buttons disappear in mobile view but the navbar remains there, make it so that it collapses into a hamburger icon on mobile view, the hamburger icon should provide all the options like (About, Featues, and account which opens another dropdown for login and signup)

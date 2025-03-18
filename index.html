@@ -6,16 +6,38 @@
     <title>QuickSeats</title>
     <link rel="icon" href="icon.png" >
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header style="padding: 0px;">
         <div class="container header-content">
             <div class="logo">QuickSeats</div>
-            <nav>
-                <a onclick="scrollToSection('about')">About</a>
-                <a onclick="scrollToSection('features')">Features</a>
+            <nav class="desktop-nav">
+                <a class="nav-entry" onclick="scrollToSection('about')">About</a>
+                <a class="nav-entry" onclick="scrollToSection('features')">Features</a>
+                <div class="account-dropdown nav-entry">
+                    Account <i class="fas fa-chevron-down"></i>
+                    <div class="dropdown-content">
+                        <a href="login">Login</a>
+                        <a href="#">Sign Up</a>
+                    </div>
+                </div>
             </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="mobile-nav">
+            <a class="nav-entry" onclick="scrollToSection('about'); toggleMobileMenu()">About</a>
+            <a class="nav-entry" onclick="scrollToSection('features'); toggleMobileMenu()">Features</a>
+            <div class="mobile-account-dropdown">
+                <button class="mobile-account-btn nav-entry">Account <i class="fas fa-chevron-down"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="#">Login</a>
+                    <a href="#">Sign Up</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -65,6 +87,7 @@
                     <h3>Shuttle Tracking</h3>
                     <p>Track the pick and drop shuttle service on weekends and never miss a seat.</p>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -139,14 +162,15 @@
     </footer>
     <script>
         function scrollToSection(id) {
-        const section = document.getElementById(id);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-            history.pushState(null, '', window.location.pathname);
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                history.pushState(null, '', window.location.pathname);
+            }
         }
-      }
+        
         function switchAnim() {
-        var mainAnimation = document.getElementById('main-anim'); 
+            var mainAnimation = document.getElementById('main-anim'); 
             if (window.innerWidth <= 768) {
                 mainAnimation.setAttribute('src', 'https://cdn.lottielab.com/l/2xJL7wSbEmTMrn.json');
                 console.log("switched to mobile")
@@ -156,6 +180,33 @@
                 console.log("switched to wide screen")
             }
         }
+
+        function toggleMobileMenu() {
+            const mobileNav = document.querySelector('.mobile-nav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function toggleMobileAccountDropdown() {
+            const mobileDropdown = document.querySelector('.mobile-dropdown-content');
+            mobileDropdown.classList.toggle('show');
+        }
+
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
+        document.querySelector('.mobile-account-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileAccountDropdown();
+        });
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.mobile-account-btn')) {
+                const dropdowns = document.getElementsByClassName('mobile-dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                    }
+                }
+            }
+        });
 
         switchAnim();
         window.onresize = switchAnim;
