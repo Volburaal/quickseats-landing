@@ -4,22 +4,302 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="signup/style.css">
-    <title>QuickSeats</title>
+    <title>QuickSeats - Create Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="../icon.png">
 </head>
 <body>
     <div class="container">
-        <div class="title">Sign Up</div>
+        <div class="title">Create Account</div>
         <div class="form_container">
-            <form action="/signup.js" class="page_form">
+            <form action="/signup.js" class="page_form" id="form">
+                <input type="text" id="name" name="name" placeholder="Enter Your Full Name">
                 <input type="text" id="email" name="email" placeholder="Enter Your Email">
-                <input type="password" id="password" name="password" placeholder="Enter Your Password">
-                <input type="password" id="password" name="password" placeholder="Confirm Your Password">
-                <a href="../login">Already have an account? Login here</a>
-                <input type="submit" value="Submit">
+                <input type="password" id="password" name="password" oninput="validatePassword()" placeholder="Create Password">
+                <input type="password" id="confirm-password" name="confirm-password" oninput="validatePassword()" placeholder="Confirm Password">
+                
+                <div class="password-requirements">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li id="req1">At least 8 characters</li>
+                        <li id="req2">One uppercase letter</li>
+                        <li id="req3">One number</li>
+                        <li id="req4">Passwords must match</li>
+                    </ul>
+                </div>
+                
+                <div class="captcha-container">
+                    <div class="captcha-box">
+                        <div class="captcha-image">
+                            <img id="captcha" src="../Captchas/Captcha1.png" width="50%" alt="CAPTCHA">
+                        </div>
+                        <div class="captcha-input">
+                            <input type="text" id="captcha-input" name="captcha" placeholder="Enter CAPTCHA">
+                            <button type="button" class="refresh-captcha" onclick="randomCaptcha()">
+                                <i class="fa fa-undo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="terms-container">
+                    <label class="terms-checkbox">
+                        <input type="checkbox" id="terms" name="terms">
+                        <span class="checkmark"></span>
+                        <span class="terms-text">I agree to the <a onclick="openModal('ToS')" class="terms-link" id="terms-link">Terms of Service</a> and <a onclick="openModal('privacy-policy')" class="terms-link" id="privacy-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+                
+                <div class="action-buttons">
+                    <button type="button" class="google-signin">
+                        <i class="fa fa-google"></i> Sign up with Google
+
+                    </button>
+                    <input type="submit" value="Create Account">
+                </div>
+                
+                <a href="../login" class="login-link">Already have an account? Sign in</a>
             </form> 
         </div>
     </div>
+
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModals()"></div>
+    <div class="modal" id="ToS">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms of Service</h2>
+                <button class="close-modal" onclick="closeModals()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Preamble and Acceptance of Agreement</h3>
+                <p>Welcome to QuickSeats (the "Service," "We," "Us," "Our"). You, the "User" (or "You"), by continuing to access, use, or interact with the Service, unequivocally agree to be bound by these Terms, including any amendments made from time to time, because why would you not want to? By the way, we suggest reading these Terms carefully. Not that anyone does, but hey, a person can dream.</p>
+                <p>In short, by continuing to use this Service, you've signed your digital soul away. So buckle up, because it only gets more entertaining from here.</p>
+
+                <h3>2. Acceptance and Modification of Terms</h3>
+                <p>You should have a deep appreciation for the fact that these Terms may be altered at any time, because we can. We could rewrite this whole thing in Shakespearean English if we wanted to, and you would still have to accept it. We reserve the right to modify, amend, or delete these Terms whenever we feel like it. Let's face it, the chances of you reading any future updates are approximately 0%, but that's okay, because it's your loss, not ours.</p>
+                <p>Any modifications will be posted online, and we will notify you by email or some other method we decide is most convenient for us. If you disagree with any change, your only real recourse is to stop using the Service, but we know you're not going to do that, are you? Thought so.</p>
+                
+                <h3>3. User Eligibility and Restrictions</h3>
+                <p>You've probably clicked "I agree" without even reading this far, and that's a shame. But, for legal purposes, let's pretend you actually read and understood this section. You confirm that you are of legal age and competent to enter into this agreement, as defined by the legal standards of your jurisdiction, which, frankly, should be a given. If not, well, we're sorry, but we don't do refunds or offer your childhood back.</p>
+                <p>Also, please don't use our Service for anything illegal, immoral, or outright absurd. We don't need to explain this further—just don't. If you think that's a gray area, well, surprise, it's not. If you get yourself banned, don't expect us to come running to save you. You're on your own, pal.</p>
+
+                <h3>4. License Grant and Proprietary Rights</h3>
+                <p>Ah yes, the good old "license" section. Here's the deal: We grant you a limited, non-transferable, non-exclusive, absolutely non-refundable (because we know you were going to ask) license to use the Service. You're welcome. We retain all the ownership rights, and we have no intention of ever sharing them with you, so don't get any funny ideas. You will not make copies of our proprietary software, distribute it, or sell it to the highest bidder. Seriously, if you try that, we'll take you to court faster than you can say "copyright infringement."</p>
+                <p>Remember, just because we let you use the Service doesn't mean you own it. Ever. Don't go around claiming otherwise, or we'll send a team of angry lawyers your way faster than you can delete your browser history.</p>
+                
+                <h3>5. User Obligations and Responsibilities</h3>
+                <p>As the proud owner of an account (we're all so impressed), you are obligated to provide us with accurate, up-to-date information. Yes, this means no false identities or pretending to be someone you're not, unless you enjoy the challenge of getting your account permanently suspended. Also, don't use your account for anything that would make us regret letting you join. We know it's tempting, but please, don't break anything. We'd rather not waste time fixing your mistakes, especially when we can be doing something far more productive, like watching paint dry.</p>
+                <p>On that note, you're fully responsible for keeping your login details private. If someone gets into your account and starts wreaking havoc, don't come crying to us. We told you to be careful. And if your account ends up being hacked, well, that's just the price you pay for not following the rules. Lesson learned, right?</p>
+
+                <h3>6. Indemnification and Limitation of Liability</h3>
+                <p>Oh, this is the part where we absolve ourselves of all responsibility for any and all misfortunes you may encounter while using the Service. We're talking about everything, including, but not limited to, personal injury, emotional distress, or your unfortunate encounter with an internet troll. If you suffer a breakdown in your social life because you spent too many hours using our platform, that's on you, not us. But hey, at least you won't have to pay us for that.</p>
+                <p>In the unlikely event you manage to file a lawsuit against us (don't worry, we know you won't), your only compensation will be a heartfelt “sorry” from our legal team, and maybe a gift card to a local coffee shop. You're welcome. But if, by some miracle, we end up in court, we're not liable for any indirect or consequential damages, because we can't be bothered to keep track of how many of your mistakes affect your life. We have more important things to do, like breathing.</p>
+
+                <h3>7. Termination and Suspension of Service</h3>
+                <p>Here's the part where we get to the fun stuff. We can, at any time, terminate or suspend your access to the Service without warning or explanation. Don't feel too bad, though; it's nothing personal. We just don't want to deal with your nonsense anymore. If you think you can get around it, good luck. You'll find that our system is shockingly effective at detecting and banning users who don't follow the rules. So, if you're on thin ice, enjoy your stay while it lasts.</p>
+                <p>And don't even think about appealing the decision. We're pretty confident that once you're gone, you'll realize this is a blessing in disguise. You'll find something else to occupy your time, and we'll all move on with our lives. It's fine.</p>
+
+                <h3>8. Dispute Resolution and Governing Law</h3>
+                <p>In the event you decide to sue us (which, let's be honest, you're probably not going to do), any disputes will be resolved in the jurisdiction of a High Court, under the laws we made by ourselves. We're not here to argue with you, and if you really want to drag things out in court, well, you're welcome to try. But just know, we already have lawers ready who would defend demons in exchnage for some money. Seriously, you're wasting your time.</p>
+                <p>We also reserve the right to require you to engage in mediation before we even consider taking it to court. So, there's that. Good luck with that, too.</p>
+
+                <h3>9. Miscellaneous Provisions</h3>
+                <p>Here's the catch-all section, where we reserve the right to do whatever we want, whenever we want, without explaining ourselves to you. These Terms are legally binding, unless we decide they aren't, and that's just how it is. Don't try to argue with us about it. This entire agreement is enforceable, even if part of it doesn't make sense, because who really reads the fine print anyway?</p>
+                <p>If any part of this agreement is deemed unenforceable, we'll just rewrite it and pretend it never happened. Deal with it.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="privacy-policy">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <button class="close-modal" onclick="closeModals()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Introduction and Scope</h3>
+                <p>Welcome to the Privacy Policy of QuickSeats (the "Service," "We," "Us," "Our"). We understand that privacy is important, but let's face it, you didn't come here for a lecture on ethics. You came here because you want to use our shiny service, and in return, you've agreed to let us collect your data. Don't worry, we'll make sure we tell you exactly what we're doing with it (mostly).</p>
+                <p>This Privacy Policy explains how we gather, use, and share your personal data. Why? Because it helps us serve you better, while also benefiting us (and let's not pretend we're not in it for the profits). By using our service, you're implicitly agreeing to these data collection practices. We're sure you've read the Terms of Service, too, right?</p>
+                
+                <h3>2. Types of Information Collected</h3>
+                <p>Here's the fun part: the data we collect from you. You didn't think you were just going to use our service for free, did you? Of course not. You provide us with personal information, and we store it for “your benefit” (but mostly, our own). Here's what we collect:</p>
+                
+                <p><b>Personal Identification Information (PII)</b>: We gather your name, email, phone number, and anything else we can persuade you to give us (like your social security number, just kidding… for now). We might even ask for payment details because, surprise, we do plan on monetizing this service. But don't worry; we'll make sure you enjoy the ride (literally and figuratively) while we happily process your payments.</p>
+                <p><b>Non-Personal Information</b>: We also grab details like your browser type, operating system, IP address, and other techie stuff. This allows us to track your every move on the platform. Why? Well, mostly to improve your experience… but also because the more we know about you, the better we can serve you targeted ads. Have you noticed how everything you do on the internet seems to know you better than your friends? Yeah, we're part of that phenomenon.</p>
+                <p><b>Cookies and Tracking Technologies</b>.: Of course, we use cookies. Not the kind you eat, but the kind that allow us to track you around the internet, serving you with ads and analyzing your habits. You might think you can disable these, but let's be real, you're probably going to leave them on. Why? Because disabling cookies would make things far less convenient for you, and we're all about convenience here.</p>
+                
+                <h3>3. Collection Methods</h3>
+                <p>We don't just ask for your information directly. Oh no, we have a whole array of clever ways to collect data:
+                <p><b>Direct Submission</b>: When you sign up for the Service or provide us with your payment information, we'll collect that sweet, sweet data directly from you. And let's not kid ourselves, you'll probably give us more data than you think you will because we've got a way of making it feel "necessary."</p>
+                <p><b>Automated Tracking</b>: Every time you visit the site, click a link, or do absolutely anything on our platform, we're tracking your movements. Sounds a bit creepy, right? But don't worry, it's for your own good. Or maybe it's for ours… depends on how you look at it. But we'll be storing that data, probably forever, for future use. What are we going to do with it? Well, we'll likely sell it to advertisers, third-party companies, and anyone else who's willing to pay us to know more about you.</p>
+                <p><b>Third-Party Integrations</b>: You didn't think we were the only ones who would be getting our hands on your data, did you? We work with third parties for everything from processing payments to sending you targeted ads. And yes, some of these third parties may just end up with your data, too, so they can profit off of it. We're all in this together, after all.</p>
+                
+                <h3>4. Use of Information</h3>
+                <p>Now, let's talk about what we're actually doing with all this data. Sure, we use it to improve the Service, but there's a more important reason: we're here to make money. And how do we do that? By using your data to sell stuff. And no, we're not just talking about the stuff we sell to you; we're talking about the stuff we can sell to other people who want to target you with their products.</p>
+                <p><b>Improving the Service</b>: We'll use your data to fine-tune the platform, make things faster, more convenient, and generally more enjoyable for you. That's true, but let's be real, it also helps us make more money. If you spend more time on our platform, you're exposed to more ads. More ads, more revenue. It's a beautiful thing, really.</p>
+                <p><b>Targeted Advertising</b>: Oh yes, we'll use your data for advertising. But don't worry, these won't be random ads that have no relevance to your life. No, we will serve you personalized ads based on everything we know about you. Want to buy that thing you searched for last week? We've got the ad for you. Don't want it? Too bad. We'll make sure you see it anyway, just in case you change your mind. Oh, and we might also sell your data to advertisers directly. Because why wouldn't we?</p>
+                <p><b>Third-Party Partnerships</b>: Remember when we said your data might get shared? It's not just for fun. We may share your information with our partners, affiliates, and other third-party companies who would love to send you targeted offers or promotions. Trust us, we're not doing it out of the kindness of our hearts. They pay us for this privilege. So, if you start receiving offers from companies you've never heard of, you'll know exactly where it came from.</p>
+                <p><b>Business Ventures</b> If we decide to merge, sell, or just hand off our business to someone else, your data will be transferred too. Why? Because it's part of the deal. You're essentially a “value asset” in this transaction, so don't be surprised if your data ends up in the hands of whoever buys us. Don't worry, they'll take good care of it… or at least they'll sell it as effectively as we would.</p>
+                
+                <h3>5. Data Sharing and Disclosure</h3>
+                <p>While we don't actively go around selling your personal information (unless we're specifically telling you we are), there are a few instances where your data might end up in the hands of people or companies you never even met:</p>
+                
+                <p><b>Affiliates and Service Providers</b>: We work with third-party service providers who help us run the platform, process your payments, or improve your experience. But here's the catch: sometimes those service providers will use your data for their own purposes, too. Don't worry, though, they've signed a really fancy contract that says they won't sell it. But, come on, we all know what happens when contracts are involved.</p>
+                <p><b>Legal Requirements</b>: Sure, we'll disclose your information if some legal authority asks for it. But let's be honest: we don't want to have to deal with the hassle of not complying with the law. If someone demands your data, we're handing it over. But just remember, that's not our favorite way to use your information.</p>
+                <p><b>Business Transitions</b>: If we ever decide to sell our business, merge with another company, or undergo any significant change, your data might be sold along with it. You're just a line item in a balance sheet, after all. We'll try to give you a heads-up, but don't hold your breath.</p>
+                
+                <h3>6. Data Security</h3>
+                <p>We've got your back, mostly. Your data is stored securely, and we employ all sorts of encryption techniques to keep it locked up tight. But let's be real: if hackers are really determined, they'll probably find a way in. We're doing our best, but if your information gets compromised, we'll send you an email to let you know, though we're sure by that point, your data might already be up for sale on the dark web.</p>
+                
+                <h3>7. Data Retention</h3>
+                <p>How long do we keep your data? Oh, forever or until it's profitable for us to do otherwise. We may hold onto your information for as long as it serves us, or until you manage to remember you have a right to ask us to delete it (which, we're not holding our breath on). The longer we have it, the more opportunities we have to make money off it, so it'll stick around as long as possible.</p>
+                
+                <h3>8. Your Rights and Choices</h3>
+                <p>You have the right to ask for your data, correct it, or even request that we delete it. But if you really think that's going to stop us from using it to our benefit, well, good luck. You can submit requests, but don't be surprised if it takes us some time to get back to you. After all, we've got a business to run. If we do grant your request, it might come with some fine print like we're going to keep a copy of it for "administrative purposes." You get it.</p>
+                
+                <h3>9. Changes to the Privacy Policy</h3>
+                <p>We reserve the right to change this Privacy Policy at any time, because, well, we can. If we change it, we'll update this page. If you don't want to be caught off-guard, you might want to check back here every once in a while. But we're betting you won't. We won't hold it against you… unless you miss the part where we say we're selling your data now.</p>
+                
+                <h3>10. Contact Information</h3>
+                <p>Questions? Concerns? Want to know more about how we're making profits off of your data? Send us your queries in a mail and we will make sure we ignore it.</p>
+                <p> Congratulations! You've officially made it through our Privacy Policy, and now you're totally aware of how your data will be used. Or at least, you're aware of how we interpret it. Now, go ahead and enjoy the service and remember, every click is another opportunity for us to sell your data. Thanks for using QuickSeats!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var currentCaptcha=1;
+        function openModal(modalID) {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modal = document.getElementById(modalID)
+            modal.classList.add('active');
+            modalOverlay.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModals() {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const termsModal = document.getElementById('ToS');
+            const privacyModal = document.getElementById('privacy-policy');
+            modalOverlay.classList.remove('active');
+            termsModal.classList.remove('active');
+            privacyModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+        function randomCaptcha(){
+            var newCaptcha = Math.floor((Math.random()*6))+1
+            while(newCaptcha == currentCaptcha){
+                newCaptcha = Math.floor((Math.random()*6))+1
+            }
+            currentCaptcha = newCaptcha
+            const captcha = document.getElementById('captcha')
+            captcha.setAttribute("src","../Captchas/Captcha"+currentCaptcha+".png")
+        }
+
+        function validatePassword(){
+            const password = document.getElementById('password');
+            const password2 = document.getElementById('confirm-password');
+
+            const req1 = document.getElementById('req1');
+            const req2 = document.getElementById('req2');
+            const req3 = document.getElementById('req3');
+            const req4 = document.getElementById('req4');
+
+            var r1=true, r2=true, r3=true, r4=true;
+
+            const text = password.value;
+            const text2 = password2.value;
+            if(text.length < 8){
+                r1 = false
+            }
+
+            r2 = false
+            for(character of text){
+                if (character >= 'A' && character <= 'Z'){
+                    r2 = true
+                }
+            }
+
+            r3 = false
+            for(character of text){
+                if (character >= '0' && character <= '9'){
+                    r3 = true
+                }
+            }
+
+            r4 = text == text2 && text.length > 0
+
+            if (r1){
+                req1.style.color='green'
+            }
+            else{
+                req1.style.color='#b555d8'
+            }
+            if (r2){
+                req2.style.color='green'
+            }
+            else{
+                req2.style.color='#b555d8'
+            }
+            if (r3){
+                req3.style.color='green'
+            }
+            else{
+                req3.style.color='#b555d8'
+            }
+            if (r4){
+                req4.style.color='green'
+            }
+            else{
+                req4.style.color='#b555d8'
+            }
+
+            return r1 && r2 && r3 && r4
+        }
+
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (!validateForm()) {
+                return;
+            }
+            // form.submit();
+        });
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const captcha = document.getElementById('captcha-input').value;
+            const termsAccepted = document.getElementById('terms').checked;
+            const validEmail=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+            if (name == ""){
+                alert("Please enter a name.");
+                return false
+            }
+            if (email == ""){
+                alert("Please enter an email.");
+                return false
+            }
+            if(!(validEmail.test(email))){
+                alert("Please enter a valid email.");
+                return false
+            }
+            if (captcha == ""){
+                alert("Please fill the captcha.");
+                return false
+            }
+            if (!validatePassword()) {
+                alert("Please make sure to fulfil all password requirements.");
+                return false
+            }
+
+            if (!termsAccepted) {
+                alert("You must agree to the terms and privacy policy.");
+                return false
+            }
+            return true
+        }
+
+    </script>
 </body>
 </html>
+

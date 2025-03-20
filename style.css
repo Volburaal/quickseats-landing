@@ -102,10 +102,11 @@ header {
     display: block;
     text-align: left;
     margin: 0;
+    transition: 0.2s ease-in-out;
 }
 
 .dropdown-content a:hover {
-    background-color: rgba(147, 51, 234, 0.2);
+    background-color: rgba(146, 51, 234, 0.103);
     color: #9333EA;
 }
 

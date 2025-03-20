@@ -1,0 +1,40 @@
+/* Additional styles for reset password page */
+.reset-container {
+    min-height: 450px;
+  }
+  
+  .reset-instructions {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(186, 51, 234, 0.1);
+    border-radius: 10px;
+    border-left: 3px solid #ba33ea;
+  }
+  
+  .reset-instructions p {
+    color: #dea5f3;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  
+  .reset-buttons {
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+  .reset-buttons input[type="submit"] {
+    width: 60%;
+  }
+  
+  @media (max-width: 767px) {
+    .reset-instructions p {
+      font-size: 0.9rem;
+    }
+  
+    .reset-buttons input[type="submit"] {
+      width: 100%;
+    }
+  }
+  
+  

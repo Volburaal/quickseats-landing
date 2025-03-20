@@ -154,116 +154,14 @@
     text-decoration: none;
     margin-top: 5px;
   }
-  
-  .forgot-password:hover {
-    color: #ebd6f3;
-    text-decoration: underline;
-  }
-  
-  .create-account {
-    align-self: center;
-    padding: 10px;
-    color: #b555d8;
-    transition: 0.15s ease-in-out;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: none;
-    margin-top: 20px;
-  }
-  
-  .create-account:hover {
-    color: #ebd6f3;
-  }
-  
-  .captcha-container {
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  .captcha-box {
-    border: 2px solid #ba33ea;
-    border-radius: 15px;
-    padding: 10px;
-    background: rgba(186, 51, 234, 0.1);
-  }
-  
-  .captcha-image {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  .captcha-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .captcha-input {
-    display: flex;
-    align-items: center;
-  }
-  
-  .captcha-input input {
-    flex: 1;
-    margin-top: 0 !important;
-    font-size: 1rem !important;
-    height: 40px !important;
-  }
-  
-  .refresh-captcha {
-    background: transparent;
-    border: none;
-    color: #dea5f3;
-    cursor: pointer;
-    padding: 5px;
-    margin-left: 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s ease-in-out;
-  }
-  
-  .refresh-captcha:hover {
-    background: rgba(186, 51, 234, 0.2);
-    color: #f2cdff;
-  }
-  
+    
   .action-buttons {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-top: 30px;
     width: 100%;
-  }
-  
-  .google-signin {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 30px;
-    background-color: transparent;
-    border: 3px solid #ba33ea;
-    color: #dea5f3;
-    font-size: 1rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-    font-weight: bold;
-    padding: 8px 15px;
-    height: 45px;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
-  }
-  
-  .google-signin:hover {
-    border: 3px solid #f2cdff;
-    color: #dea5f3;
-    box-shadow: 0px 0px 10px 5px rgba(186, 51, 234, 0.5);
-    text-shadow: 0 0 10px #dea5f3;
   }
   
   .page_form input[type="submit"] {
@@ -288,6 +186,14 @@
     color: #dea5f3;
     box-shadow: 0px 0px 10px 5px #ba33ea;
     text-shadow: 0 0 10px #dea5f3;
+  }
+  .login-link{
+    color: #dea5f3;
+    font-size: 1.3rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    margin-bottom: 15px;
+    align-self: center;
   }
   
   @media (min-width: 768px) {
@@ -354,6 +260,9 @@
       font-size: 0.9rem;
       order: 2;
     }
+    .login-link{
+        order: 2;
+    }
   
     .page_form input[type="submit"] {
       width: 100%;
@@ -383,5 +292,3 @@
       font-size: 1.8rem;
     }
   }
-  
-  

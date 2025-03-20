@@ -7,18 +7,87 @@
     <link rel="stylesheet" href="login/style.css">
     <title>QuickSeats</title>
     <link rel="icon" href="../icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
         <div class="title">Sign In</div>
         <div class="form_container">
-            <form action="/action_page.php" class="page_form">
+            <form action="/login.js" class="page_form" id="form">
                 <input type="text" id="email" name="email" placeholder="Enter Your Email">
                 <input type="password" id="password" name="password" placeholder="Enter Your Password">
-                <a href="../signup">No account? Create one</a>
-                <input type="submit" value="Submit">
+                <a href="../passwordReset" class="forgot-password">Forgot password?</a>
+                
+                <div class="captcha-container">
+                    <div class="captcha-box">
+                        <div class="captcha-image">
+                            <img id="captcha" src="../Captchas/Captcha1.png" width="50%" alt="CAPTCHA">
+                        </div>
+                        <div class="captcha-input">
+                            <input type="text" id="captcha-input" name="captcha" placeholder="Enter CAPTCHA">
+                            <button type="button" class="refresh-captcha" onclick="randomCaptcha()">
+                                <i class="fa fa-undo"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button type="button" class="google-signin">
+                        <i class="fa fa-google"></i> Sign in with Google
+                    </button>
+                    <input type="submit" value="Submit">
+                </div>
+                
+                <a href="../signup" class="create-account">No account? Create one</a>
             </form> 
         </div>
     </div>
+    <script>
+        var currentCaptcha=1;
+        function randomCaptcha(){
+            var newCaptcha = Math.floor((Math.random()*6))+1
+            while(newCaptcha == currentCaptcha){
+                newCaptcha = Math.floor((Math.random()*6))+1
+            }
+            currentCaptcha = newCaptcha
+            const captcha = document.getElementById('captcha')
+            captcha.setAttribute("src","../Captchas/Captcha"+currentCaptcha+".png")
+        }
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (!validateForm()) {
+                return;
+            }
+            window.location.href = "../"
+            // form.submit();
+        });
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const captcha = document.getElementById('captcha-input').value;
+            const validEmail=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+            if (email == ""){
+                alert("Please enter an email.");
+                return false
+            }
+            if(!(validEmail.test(email))){
+                alert("Please enter a valid email.");
+                return false
+            }
+            if (password == ""){
+                alert("Please enter your password.");
+                return false
+            }
+            if (captcha == ""){
+                alert("Please fill the captcha.");
+                return false
+            }
+            return true
+        }
+        
+    </script>
 </body>
 </html>
+
